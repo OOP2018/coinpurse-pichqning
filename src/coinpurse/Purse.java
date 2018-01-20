@@ -1,6 +1,4 @@
 package coinpurse;
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -110,7 +108,7 @@ public class Purse {
        
     	double amountNeededToWithdraw = amount;
     	if (amountNeededToWithdraw <= 0 ) {
-    		System.out.println("No money jaa");
+    		System.out.println("Cannot withdraw the money.");
     		return null;
     	}
 
@@ -136,19 +134,16 @@ public class Purse {
     	// Your code might use some other variable for the remaining amount to withdraw.
 		List<Coin> templist = new ArrayList<>();
 	    	java.util.Collections.sort( money );
-	    	Collections.reverse( money );
     	
-    	if ( amountNeededToWithdraw != 0 )
-		{	
-			// failed. Don't change the contents of the purse.
-	    	for (int k = 0 ; k <= money.size() ; k++) {
-	    		if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
-	    			amountNeededToWithdraw = amountNeededToWithdraw - money.get(k).getValue();
-	    			templist.add(money.get(k));
-	    			money.remove(k);
-	    		}
-	    		else break;
-	    	}
+		for (int k = money.size() - 1; k >= 0; k--) {
+			if (amountNeededToWithdraw != 0) {
+				if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
+					amountNeededToWithdraw = amountNeededToWithdraw - money.get(k).getValue();
+					templist.add(money.get(k));
+					money.remove(money.get(k));
+				} else
+					break;
+			}
 
 		}
 
@@ -160,8 +155,7 @@ public class Purse {
 		// toArray returns a reference to the array itself.
     	Coin [] moneyArray = new Coin [templist.size()];
     	if ( amountNeededToWithdraw > 0) {
-    		money.addAll(templist)
-    		;
+    		money.addAll(templist);
     		return null;
     	}
         return templist.toArray(moneyArray); 
