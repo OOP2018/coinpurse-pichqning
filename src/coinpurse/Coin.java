@@ -9,19 +9,18 @@ package coinpurse;
  */
 public class Coin implements Comparable<Coin> {
 	
-	/**
-	 * 
-	 * @param value of the money.
-	 * @param currency of the money.
-	 * 
-	 **/
+	/**value of the coin.*/
 	private double value;
+	
+	/**currency of the coin.*/
 	private String currency;
 	
+	/**get the value of the coin.*/
 	public double getValue() {
 		return value;
 	}
 
+	/**get the currency of the coin.*/
 	public String getCurrency() {
 		return currency;
 	}
@@ -32,9 +31,9 @@ public class Coin implements Comparable<Coin> {
 		this.currency = currency;
 	}
 
-	@Override
 	/**
 	 * This method test that Are each money is equals by value and currency. **/
+	@Override
 	public boolean equals(Object obj) {
 		 if (obj == null) {
 	            return false;
@@ -51,7 +50,7 @@ public class Coin implements Comparable<Coin> {
 	 * @param coin
 	 * @return 0 or 1 or -1
 	 * 0 is mean the value is equals
-	 * 1 is mean a is biger than b
+	 * 1 is mean a is bigger than b
 	 * -1 is mean a is smaller than b **/
 	public int compareTo (Coin coin) {
 		double a = this.getValue();
