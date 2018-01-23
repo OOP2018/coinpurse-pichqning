@@ -48,7 +48,7 @@ public class Purse {
      *  @return the total value of items in the purse.
      */
     public double getBalance() {
-    	int total = 0;
+    	double total = 0;
 		for ( Coin a : money ) {
 		 total += a.getValue(); 
 		 }
@@ -61,9 +61,9 @@ public class Purse {
      * Return the capacity of the coin purse.
      * @return the capacity
      */
-    //TODO write accessor method for capacity. Use Java naming convention.
+    
     public int getCapacity() { 
-		return capacity; 
+		return this.capacity; 
 	}
     
     /** 
@@ -74,7 +74,7 @@ public class Purse {
      */
     public boolean isFull() {
 		
-		if (count() == capacity) {
+		if (count() >= capacity) {
 			return true;
 		} else {
 			return false;
@@ -92,9 +92,12 @@ public class Purse {
     	if(isFull()) {
     		return false;
     	}
-    	money.add(coin);
+    	else if (coin.getValue() > 0 ) {
+    	money.add(coin); 
+    
         return true;
     }
+    	return false;}
     
     /**  
      *  Withdraw the requested amount of money.
@@ -107,10 +110,12 @@ public class Purse {
     public Coin[] withdraw( double amount ) {
        
     	double amountNeededToWithdraw = amount;
-    	if (amountNeededToWithdraw <= 0 ) {
-    		System.out.println("Cannot withdraw the money.");
+    	Collections.sort(money);
+    	if (amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw ) {
+    		//System.out.println("Cannot withdraw the money.");
     		return null;
     	}
+    
 
 
 	   /*
@@ -136,14 +141,13 @@ public class Purse {
 	    	java.util.Collections.sort( money );
     	
 		for (int k = money.size() - 1; k >= 0; k--) {
-			if (amountNeededToWithdraw != 0) {
+			if (amountNeededToWithdraw >= 0) {
 				if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
-					amountNeededToWithdraw = amountNeededToWithdraw - money.get(k).getValue();
+					amountNeededToWithdraw -= money.get(k).getValue();
 					templist.add(money.get(k));
-					money.remove(money.get(k));
-				} else
-					break;
-			}
+					money.remove(k);
+				} 
+			}else break;
 
 		}
 
