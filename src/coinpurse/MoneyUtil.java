@@ -7,15 +7,17 @@ package coinpurse;
  */
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MoneyUtil {
 	
 	/**
-	 * This is for sort the coin from the smallest to biggest.**/
-	public static void sortCoins (List<Coin> coins) {
-		java.util.Collections.sort( coins );
-		
+	 * This is for sort the coin from the smallest to biggest.
+	 * **/
+	public static void sortCoins (List<Valuable> valuable) {
+		Comparator<Valuable> comp = new ValueComparator();
+		valuable.sort(comp);
 	}
 	
 	/**
@@ -24,9 +26,9 @@ public class MoneyUtil {
 	 * @param currency (Currency that want to sort by).
 	 * @return the list of the coin that already sort by the currency.
 	 */
-	public static List<Coin> filterByCurrency (List<Coin> coins , String currency){
-		List<Coin> sortCurr = new ArrayList<Coin>();
-		for (Coin i : coins) {
+	public static List<Valuable> filterByCurrency (List<Valuable> coins , String currency){
+		List<Valuable> sortCurr = new ArrayList<Valuable>();
+		for (Valuable i : coins) {
 			if(i.getCurrency().toLowerCase().equals(currency.toLowerCase())) {
 				sortCurr.add(i);
 			}
@@ -34,24 +36,23 @@ public class MoneyUtil {
 		return sortCurr ;
 	}
 	public static void main(String[] args) {
-		List<Coin> coins = new ArrayList<Coin>();
-    	coins.add( new Coin (10.0,"Baht"));
-    	coins.add( new Coin (0.5,"Baht"));
-    	coins.add( new Coin (20,"Dollar"));
-    	coins.add( new Coin (500,"Won"));
-    	coins.add( new Coin (2.0,"Baht"));
-    	coins.add( new Coin (15,"Dollar"));
-    	coins.add( new Coin (1.0,"Baht"));
-    	coins.add( new Coin (100,"Won"));
-    	printCoins ( coins ) ;
-    	sortCoins ( coins );
-    	printCoins ( coins ) ;
+		List<Valuable> valuable = new ArrayList<Valuable>();
+    	valuable.add( new Coin (10.0,"Baht"));
+    	valuable.add( new Coin (0.5,"Baht"));
+    	valuable.add( new Coin (20,"Dollar"));
+    	valuable.add( new Coin (2.0,"Baht"));
+    	valuable.add( new Coin (15,"Dollar"));
+    	valuable.add( new Coin (1.0,"Baht"));
+ 
+    	printCoins ( valuable ) ;
+    	sortCoins ( valuable );
+    	printCoins ( valuable ) ;
     	
-    	List<Coin> testFilbyCur = filterByCurrency(coins,"Baht");
+    	List<Valuable> testFilbyCur = filterByCurrency(valuable,"Baht");
     	System.out.println("Sort by currency : " + testFilbyCur);
 	}
 	/**This method is the method for print all of coins.**/
-	 public static void printCoins (List<Coin> coins) {
+	 public static void printCoins (List<Valuable> coins) {
 	    	System.out.println(coins);
 	    }
 }
