@@ -7,7 +7,7 @@ package coinpurse;
  * 
  *
  */
-public class Coin implements Comparable<Coin> {
+public class Coin implements Comparable<Coin> , Valuable {
 	
 	/**value of the coin.*/
 	private double value;
@@ -67,6 +67,7 @@ public class Coin implements Comparable<Coin> {
 		}
 	}
 	
+	@Override
 	public String toString () {
 		return String.format("%.2f-%s", value, currency);
 	}
