@@ -29,7 +29,7 @@ public class ValueComparator implements Comparator<Valuable> {
 			else return -1;
 		}
 		else {
-			if (a.getCurrency().length() > b.getCurrency().length()) {
+			if (a.getCurrency().compareTo(b.getCurrency())>0) {
 				return 1;
 			}
 			else return -1;

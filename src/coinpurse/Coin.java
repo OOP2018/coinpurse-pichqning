@@ -7,7 +7,7 @@ package coinpurse;
  * 
  *
  */
-public class Coin implements Comparable<Coin> , Valuable {
+public class Coin implements Valuable {
 	
 	/**value of the coin.*/
 	private double value;
@@ -45,27 +45,6 @@ public class Coin implements Comparable<Coin> , Valuable {
 	        return this.currency.equals(other.currency) && this.value == other.value ;
 	}
 	
-	/**
-	 * This method is compare the value of the money that which onr is bigger or smaller.
-	 * @param coin
-	 * @return 0 or 1 or -1
-	 * 0 is mean the value is equals
-	 * 1 is mean a is bigger than b
-	 * -1 is mean a is smaller than b **/
-	public int compareTo (Coin coin) {
-		double a = this.getValue();
-		double b = coin.getValue();
-		
-		if (a-b == 0) {
-			return 0;
-		}
-		else if (a-b < 0) {
-			return -1;
-		}
-		else {
-			return 1;
-		}
-	}
 	
 	@Override
 	public String toString () {

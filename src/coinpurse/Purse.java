@@ -12,6 +12,12 @@ import java.util.List;
  *  @author Pichaaun Popukdee
  */
 public class Purse {
+	
+	/**
+	 * Comparator for valuables.
+	 */
+	private Comparator<Valuable> comp = new ValueComparator();
+	
     /** Collection of objects in the purse. */
 	List<Valuable> money ;
     
@@ -108,7 +114,7 @@ public class Purse {
     	if (amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw ) {
     		return null;
     	}
-    	Comparator<Valuable> comp = new ValueComparator();
+    	
 		List<Valuable> templist = new ArrayList<>();
 	    money.sort(comp);	
 		

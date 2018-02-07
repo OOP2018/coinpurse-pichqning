@@ -41,7 +41,7 @@ public class BankNote implements Valuable{
 
 	/**
 	 * Get the currency of the banknote.
-	 * @return currncy
+	 * @return currency
 	 */
 	public String getCurrency() {
 		return currency;
@@ -59,7 +59,7 @@ public class BankNote implements Valuable{
 	public BankNote (double value , String currency ) {
 		this.value = value;
 		this.currency = currency;
-		this.serialNumber = nextSerialNumber+1;
+		this.serialNumber = nextSerialNumber++;
 	}
 	
 	/**
