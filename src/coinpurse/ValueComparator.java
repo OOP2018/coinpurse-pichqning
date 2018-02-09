@@ -17,24 +17,16 @@ public class ValueComparator implements Comparator<Valuable> {
 	 * 
 	 * @param a Valuable obj that we want to compare with other Valuable.
 	 * @param b Valuable obj that we bring to compare with a
-	 * @return  1 show that a>b
-	 * 			0 show that a=b
-	 * 			-1 show that a<b
+	 * @return negative integer if a less than b.
+	 * zero if a equals b.
+	 * positive integer if a more than b.
 	 * 
 	 */
 	public int compare(Valuable a, Valuable b) {
 		if (a.getCurrency().equals(b.getCurrency())) {
-			if(a.getValue() == b.getValue()) return 0;
-			else if (a.getValue() > b.getValue()) return 1;
-			else return -1;
+			return Double.compare(a.getValue(), b.getValue());
 		}
-		else {
-			if (a.getCurrency().compareTo(b.getCurrency())>0) {
-				return 1;
-			}
-			else return -1;
-		}
-		
-	}
+		else return a.getCurrency().compareTo(b.getCurrency());
 
+}
 }
