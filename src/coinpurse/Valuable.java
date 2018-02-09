@@ -4,7 +4,7 @@ package coinpurse;
  *@author Pichaaun Popukdee
  */
 
-public interface Valuable {
+public interface Valuable extends Comparable<Valuable> {
 	/**
 	 * Get the monetary value of this object.
 	 * @return the value of this object
@@ -15,6 +15,7 @@ public interface Valuable {
 	 * @return the currency of this object
 	 */
 	public String getCurrency();
+	int compareTo(Valuable o);
 	
 	
 }

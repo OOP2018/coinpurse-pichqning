@@ -8,22 +8,12 @@ package coinpurse;
  *
  */
 
-public class BankNote implements Valuable{
+public class BankNote extends Money{
 	
 	/**
 	 * next serial number of next banknote.
 	 */
-	private long nextSerialNumber = 1000000;
-	
-	/**
-	 * Value of the banknote.
-	 */
-	private double value;
-	
-	/**
-	 * Currency of the banknote.
-	 */
-	private String currency;
+	private static long nextSerialNumber = 1000000;
 	
 	/**
 	 * Serial number of each banknote.
@@ -31,21 +21,6 @@ public class BankNote implements Valuable{
 	 */
 	private long serialNumber;
 	
-	/**
-	 * Get the value of the banknote
-	 * @return value
-	 */
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * Get the currency of the banknote.
-	 * @return currency
-	 */
-	public String getCurrency() {
-		return currency;
-	}
 
 	/**
 	 * Get the serial number of each banknote
@@ -57,28 +32,14 @@ public class BankNote implements Valuable{
 
 
 	public BankNote (double value , String currency ) {
-		this.value = value;
-		this.currency = currency;
+		super (value,currency);
 		this.serialNumber = nextSerialNumber++;
 	}
 	
-	/**
-	 * This method test that Are each money is equals by value and currency. **/
-	@Override
-	public boolean equals(Object obj) {
-		 if (obj == null) {
-	            return false;
-	        }
-	        if (obj.getClass() != this.getClass()) {
-	            return false;
-	        }
-	        BankNote other = (BankNote)obj;
-	        return this.currency.equals(other.currency) && this.value == other.value ;
-	}
 	
 	@Override
 	public String toString() {
-		return String.format("%.0f-%s note [%d]", value , currency , serialNumber);
+		return String.format("%.0f-%s note [%d]", this.getValue() , this.getCurrency() , serialNumber);
 	}
 	
 	

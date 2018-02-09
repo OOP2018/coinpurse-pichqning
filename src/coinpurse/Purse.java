@@ -100,41 +100,47 @@ public class Purse {
     }
     	return false;}
     
-    /**  
-     *  Withdraw the requested amount of money.
-     *  Return an array of valuable withdrawn from purse,
-     *  or return null if cannot withdraw the amount requested.
-     *  @param amountNeededToWithdraw is the amount to withdraw
-     *  @return array of valuable objects for money withdrawn, 
-	 *    or null if cannot withdraw requested amount.
-     */
-    public Valuable[] withdraw( double amount ) {
-       
-    	double amountNeededToWithdraw = amount;
-    	if (amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw ) {
-    		return null;
-    	}
+    public Valuable[] withdraw (Valuable amount) {
+    	double amountNeededToWithdraw = amount.getValue();
+        	if (amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw ) {
+        		return null;
+        	}
+    		List<Valuable> templist = new ArrayList<>();
+    	    money.sort(comp);	
     	
-		List<Valuable> templist = new ArrayList<>();
-	    money.sort(comp);	
-		
-    	
-		for (int k = money.size() - 1; k >= 0; k--) {
-			if (amountNeededToWithdraw >= 0) {
-				if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
-					amountNeededToWithdraw -= money.get(k).getValue();
-					templist.add(money.get(k));
-					money.remove(k);
-				} 
-			}else break;
-		}
+    		for (int k = money.size() - 1; k >= 0; k--) {
+    			if (amountNeededToWithdraw >= 0) {
+    			if (money.get(k).getCurrency().equalsIgnoreCase(amount.getCurrency())){ 
+    				if (amountNeededToWithdraw == 0 ) break;
+    				if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
+    					amountNeededToWithdraw -= money.get(k).getValue();
+    					templist.add(money.get(k));
+    					money.remove(k);
+    				} 
+    			}else break;
+    			}
+    		}
 
-    	Valuable [] moneyArray = new Valuable [templist.size()];
-    	if ( amountNeededToWithdraw > 0) {
-    		money.addAll(templist);
-    		return null;
-    	}
-        return templist.toArray(moneyArray); 
+        	Valuable [] moneyArray = new Valuable [templist.size()];
+        	moneyArray = templist.toArray(moneyArray);
+        	if ( moneyArray == null  ) return null;
+        	if ( amountNeededToWithdraw > 0) {
+        		money.addAll(templist);
+        		return null;
+        	}
+            return moneyArray;
+        }
+    
+        /**  
+         *  Withdraw the requested amount of money.
+         *  Return an array of valuable withdrawn from purse,
+         *  or return null if cannot withdraw the amount requested.
+         *  @param amountNeededToWithdraw is the amount to withdraw
+         *  @return array of valuable objects for money withdrawn, 
+    	 *    or null if cannot withdraw requested amount.
+         */
+        public Valuable[] withdraw( double amounts ) {	
+           return withdraw(new Money(amounts,"Baht"));
 	}
   
     /** 
@@ -146,4 +152,5 @@ public class Purse {
     	return String.format("%d valuable with value %.2f", count(),getBalance());
     }
 
+    
 }
