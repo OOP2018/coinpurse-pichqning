@@ -20,12 +20,12 @@ public class Money implements Valuable {
 
 	/**get the value of the money.*/
 	public double getValue() {
-		return value;
+		return this.value;
 	}
 
 	/**get the currency of the money.*/
 	public String getCurrency() {
-		return currency;
+		return this.currency;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class Money implements Valuable {
 	            return false;
 	        }
 	        Money other = (Money)obj;
-	        return this.currency.equals(other.currency) && this.value == other.value ;
+	        return this.currency==(other.currency) && this.value == other.value ;
 	}
 
 	/***
@@ -50,6 +50,6 @@ public class Money implements Valuable {
 	 * 			-1 show that this<o
 	 */
 	public int compareTo(Valuable o) {
-		return Double.compare(this.value, o.getValue());
+		return Double.compare(this.getValue(), o.getValue());
 	}
 }

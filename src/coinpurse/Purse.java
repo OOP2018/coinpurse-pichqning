@@ -31,7 +31,7 @@ public class Purse {
      *  @param capacity is maximum number of money you can put in purse.
      */
     public Purse( int capacity ) {
-    	money = new ArrayList<Valuable>();
+    	money = new ArrayList<>();
     	this.capacity = capacity;
     	
     }
@@ -93,6 +93,7 @@ public class Purse {
     	if(isFull()) {
     		return false;
     	}
+    	else if (valuable.getValue() == 0) return false;
     	else if (valuable.getValue() > 0 ) {
     	money.add(valuable); 
     
@@ -101,7 +102,7 @@ public class Purse {
     	return false;}
     
     public Valuable[] withdraw (Valuable amount) {
-    	double amountNeededToWithdraw = amount.getValue();
+    		double amountNeededToWithdraw = amount.getValue();
         	if (amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw ) {
         		return null;
         	}
@@ -109,25 +110,24 @@ public class Purse {
     	    money.sort(comp);	
     	
     		for (int k = money.size() - 1; k >= 0; k--) {
-    			if (amountNeededToWithdraw >= 0) {
-    			if (money.get(k).getCurrency().equalsIgnoreCase(amount.getCurrency())){ 
-    				if (amountNeededToWithdraw == 0 ) break;
+    			if (amountNeededToWithdraw == 0 ) break;
+    			if (amountNeededToWithdraw > 0 && amount.getCurrency().equalsIgnoreCase(money.get(k).getCurrency())) {
     				if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
     					amountNeededToWithdraw -= money.get(k).getValue();
     					templist.add(money.get(k));
     					money.remove(k);
-    				} 
-    			}else break;
+    					} 
+    				}
     			}
-    		}
+    		
 
         	Valuable [] moneyArray = new Valuable [templist.size()];
         	moneyArray = templist.toArray(moneyArray);
-        	if ( moneyArray == null  ) return null;
         	if ( amountNeededToWithdraw > 0) {
         		money.addAll(templist);
         		return null;
         	}
+        	if ( moneyArray == null  ) return null;
             return moneyArray;
         }
     
