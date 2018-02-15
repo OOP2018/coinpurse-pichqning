@@ -2,6 +2,7 @@ package coinpurse;
 
 /**
  * 
+ * Money represents coinage (money) with a fixed value and currency.
  * @author HP
  *
  */
@@ -39,7 +40,7 @@ public class Money implements Valuable {
 	            return false;
 	        }
 	        Money other = (Money)obj;
-	        return this.currency==(other.currency) && this.value == other.value ;
+	        return this.currency.equals(other.currency) && this.value == other.value ;
 	}
 
 	/***

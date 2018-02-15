@@ -15,7 +15,7 @@ public interface Valuable extends Comparable<Valuable> {
 	 * @return the currency of this object
 	 */
 	 String getCurrency();
-	int compareTo(Valuable o);
+	
 	
 	
 }
