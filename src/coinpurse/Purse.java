@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- *  A Valuable purse contains with coins and banknotes.
- *  You can insert coins and banknotes, withdraw money, check the balance,
+ *  A Valuable purse contains money.
+ *  You can insert money, withdraw money, check the balance,
  *  and check if the purse is full.
  *  
  *  @author Pichaaun Popukdee
@@ -103,7 +103,7 @@ public class Purse {
     
     public Valuable[] withdraw (Valuable amount) {
     		double amountNeededToWithdraw = amount.getValue();
-        	if (amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw ) {
+        	if (amountNeededToWithdraw < 0 || amount == null) {
         		return null;
         	}
     		List<Valuable> templist = new ArrayList<>();
@@ -127,7 +127,6 @@ public class Purse {
         		money.addAll(templist);
         		return null;
         	}
-        	if ( moneyArray == null  ) return null;
             return moneyArray;
         }
     
