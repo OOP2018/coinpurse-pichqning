@@ -102,10 +102,11 @@ public class Purse {
     	return false;}
     
     public Valuable[] withdraw (Valuable amount) {
-    		double amountNeededToWithdraw = amount.getValue();
-        	if (amountNeededToWithdraw < 0 || amount == null) {
+    	if(amount == null) return null;
+        	if (amount.getValue()< 0 ){
         		return null;
         	}
+        	double amountNeededToWithdraw = amount.getValue();
     		List<Valuable> templist = new ArrayList<>();
     	    money.sort(comp);	
     	
