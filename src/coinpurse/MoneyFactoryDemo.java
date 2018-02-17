@@ -1,67 +1,41 @@
 package coinpurse;
 /**
  * 
+ * 
  * @author Pichaaun Popukdee
  *
  */
 
 public class MoneyFactoryDemo {
+
+	public static void main(String[] args) {
+		
+		/*
+		 * set factory to ThaiMoneyFactory currency is Baht.
+		 */
+	MoneyFactory.setFactory(new ThaiMoneyFactory());
+	MoneyFactory factory = MoneyFactory.getInstance();
+	Valuable money = factory.createMoney(10.0);
+	System.out.println(money.toString());
 	
-	/**
-	 * 
-	 * @param factoryclass
-	 */
-	private static void setFactory(String factoryclass) {
-		MoneyFactory factory = null;
-		try {
-			factory = (MoneyFactory) Class.forName(factoryclass).newInstance();
-		} catch (IllegalArgumentException | InstantiationException | ClassNotFoundException | IllegalAccessException ex) {
-			throw new IllegalArgumentException("Factory is incorrect");
-		}
-	}
+	Valuable money1 = factory.createMoney("100.0");
+	System.out.println(money1.toString());
 	
 	/*
-	 * 
+	 * set factory to MalayMoneyFactory currency is Ringgit and sen.
 	 */
-	private static Money createMalay (double value) {
-		if (value == 0.05 || value == 0.10 || value == 0.20 || value == 0.50) return new Coin(value, "Sen");
-		else if (value == 1 || value == 2 || value == 5 || value == 10 || value == 20 || value == 50 || value == 100) return new BankNote(value,"Ringgit");		
-		else throw new IllegalArgumentException("Cannot create" + value + "Baht");
-	}
+	MoneyFactory.setFactory(new MalayMoneyFactory());
+	MoneyFactory factoryMalay = MoneyFactory.getInstance();
 	
-	/**
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private static Money createThai (double value) {
-		if (value == 0.25 || value == 0.50 || value == 1 || value == 2 || value == 5 || value == 10 ) return new Coin(value,"Baht" );
-		else if (value == 20 || value == 50 || value == 100 || value == 500 || value == 1000) return new BankNote(value,"Baht");		
-		else throw new IllegalArgumentException("Fuck off this country!");
-	}
+	Valuable money2 = factoryMalay.createMoney(0.10);
+	System.out.println(money2.toString());
 	
-	/**
-	 * 
-	 * @param testPrompt
-	 * @param expected
-	 * @param actual
-	 */
-	private static void testing(String testPrompt , Object expected , Object actual){
-		System.out.println(testPrompt + " test");
-		System.out.printf("Expected : %s , Actual: %s , Result: %s%n" , expected , actual , expected.equals(actual));
-	}
+	Valuable money3 = factoryMalay.createMoney("100.0");
+	System.out.println(money3.toString());
 	
-	/**
-	 *  
-	 * @param amounts
-	 */
-	private static void testThaiMoney (double[] amounts) {
-		setFactory("coinpurse.ThaiMoneyFactory");
-		MoneyFactory moneyFactory = MoneyFactory.getInstance();
-		System.out.println("Test create money");
-		for (double value : amounts) {
-			testing("Create" + value + "Baht" , moneyFactory.createMoney(value) , createMalay(value));
-		}
-		
-	}
-	}
+	Valuable money4 = factoryMalay.createMoney("5.0");
+	System.out.println(money4.toString());
+	
+	
+
+}}
