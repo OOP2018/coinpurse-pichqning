@@ -1,5 +1,11 @@
 package coinpurse;
 
+/**
+ * This class represent the factory for create Malaysia money in Ringgit and Sen.
+ * @author Pichaaun Popukdee.
+ *
+ */
+
 public class MalayMoneyFactory extends MoneyFactory{
 
 	/**

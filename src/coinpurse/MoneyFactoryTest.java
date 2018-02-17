@@ -1,7 +1,12 @@
 package coinpurse;
 import static junit.framework.TestCase.assertEquals;
 import org.junit.*;
-
+/**
+ * 
+ * TestCases for MoneyFactory class.
+ * @author Pichaaun Popukdee
+ *
+ */
 public class MoneyFactoryTest {
 
 	@Test

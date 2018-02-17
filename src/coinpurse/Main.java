@@ -1,7 +1,6 @@
 package coinpurse;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * A main class to create objects and connect objects together.
@@ -9,6 +8,28 @@ import java.util.List;
  * @author Pichaaun Popukdee
  */
 public class Main {
+	
+	/**
+	 * create a ResourceBundle from file "purse.properties" on the classpath.
+	 * 
+	 */
+	public static void init() {
+		ResourceBundle bundle = ResourceBundle.getBundle("Purse");
+		String factoryclass = bundle.getString( "moneyfactory" ); 
+		MoneyFactory factory = null; 
+		try { 
+		factory = (MoneyFactory)Class.forName(factoryclass).newInstance(); 
+		} 
+		catch (ClassCastException cce) { 
+		System.out.println(factoryclass+" is not type MoneyFactory"); 
+		} 
+		catch (Exception ex) { 
+		System.out.println("Error creating MoneyFactory "+ex.getMessage() ); 
+		} 
+		if (factory == null) System.exit(1); 
+		MoneyFactory.setFactory(factory); 
+		}
+	
 
     /**
      * Configure and start the application.

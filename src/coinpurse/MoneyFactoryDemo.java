@@ -1,7 +1,7 @@
 package coinpurse;
 /**
  * 
- * 
+ * This class is intitial test for MoneyFactory.
  * @author Pichaaun Popukdee
  *
  */
