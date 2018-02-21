@@ -11,11 +11,6 @@ package coinpurse;
 public class BankNote extends Money{
 	
 	/**
-	 * next serial number of next banknote.
-	 */
-	private static long nextSerialNumber = 1000000;
-	
-	/**
 	 * Serial number of each banknote.
 	 * (Every banknote has differnt serial number)
 	 */
@@ -31,10 +26,9 @@ public class BankNote extends Money{
 	}
 
 
-	public BankNote (double value , String currency ) {
+	public BankNote (double value , String currency , long serialNumber) {
 		super (value,currency);
-		this.serialNumber = nextSerialNumber;
-		nextSerialNumber++;
+		this.serialNumber = serialNumber;
 	}
 	
 	
@@ -43,10 +37,6 @@ public class BankNote extends Money{
 		return String.format("%.0f-%s note [%d]", this.getValue() , this.getCurrency() , serialNumber);
 	}
 	
-	public static void setNextSerial(long nextSerialNumber) {
-		BankNote.nextSerialNumber = nextSerialNumber;
-	}
-	
-	
+
 	
 }

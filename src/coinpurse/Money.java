@@ -51,6 +51,11 @@ public class Money implements Valuable {
 	 * 			-1 show that this<o
 	 */
 	public int compareTo(Valuable o) {
-		return Double.compare(this.getValue(), o.getValue());
+		if (this.getCurrency().equalsIgnoreCase(o.getCurrency())) {
+			return Double.compare(this.getValue(), o.getValue());
+		} else
+			return this.getCurrency().compareTo(o.getCurrency());
+
 	}
-}
+	}
+
