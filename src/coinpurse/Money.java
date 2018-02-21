@@ -3,7 +3,7 @@ package coinpurse;
 /**
  * 
  * Money represents coinage (money) with a fixed value and currency.
- * @author HP
+ * @author Pichaaun Popukdee
  *
  */
 
