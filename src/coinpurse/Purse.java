@@ -1,4 +1,7 @@
 package coinpurse;
+import coinpurse.strategy.RecursiveWithdraw;
+import coinpurse.strategy.WithdrawStrategy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,14 +28,19 @@ public class Purse {
      *  Capacity is set when the purse is created and cannot be changed.
      */
     private final int capacity;
-    
-    /** 
+
+	/**
+	 * Strategy to withdraw the valuable
+	 */
+	private WithdrawStrategy strategy;
+	/**
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of money you can put in purse.
      */
     public Purse( int capacity ) {
     	money = new ArrayList<>();
     	this.capacity = capacity;
+    	setStrategy(new RecursiveWithdraw());
     	
     }
 
@@ -106,28 +114,16 @@ public class Purse {
         	if (amount.getValue()< 0 ){
         		return null;
         	}
-        	double amountNeededToWithdraw = amount.getValue();
-    		List<Valuable> templist = new ArrayList<>();
-    	    money.sort(comp);	
-    	
-    		for (int k = money.size() - 1; k >= 0; k--) {
-    			if (amountNeededToWithdraw == 0 ) break;
-    			if (amountNeededToWithdraw > 0 && amount.getCurrency().equalsIgnoreCase(money.get(k).getCurrency())) {
-    				if (amountNeededToWithdraw - money.get(k).getValue() >= 0) {
-    					amountNeededToWithdraw -= money.get(k).getValue();
-    					templist.add(money.get(k));
-    					money.remove(k);
-    					} 
-    				}
-    			}
-    		
+    	    money.sort(comp);
+		 	List<Valuable> templist = strategy.withdraw(amount,money);
+    		if (templist.size() > 0) {
+		 		for (Valuable value : templist) {
+		 			money.remove(value);
+				}
+			}else return null;
 
         	Valuable [] moneyArray = new Valuable [templist.size()];
         	moneyArray = templist.toArray(moneyArray);
-        	if ( amountNeededToWithdraw > 0) {
-        		money.addAll(templist);
-        		return null;
-        	}
             return moneyArray;
         }
     
@@ -135,7 +131,7 @@ public class Purse {
          *  Withdraw the requested amount of money.
          *  Return an array of valuable withdrawn from purse,
          *  or return null if cannot withdraw the amount requested.
-         *  @param amountNeededToWithdraw is the amount to withdraw
+         *  @param amounts is the amount to withdraw
          *  @return array of valuable objects for money withdrawn, 
     	 *    or null if cannot withdraw requested amount.
          */
@@ -152,5 +148,8 @@ public class Purse {
     	return String.format("%d valuable with value %.2f", count(),getBalance());
     }
 
-    
+
+	public void setStrategy(WithdrawStrategy strategy) {
+		this.strategy = strategy;
+	}
 }

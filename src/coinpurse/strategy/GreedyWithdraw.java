@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Withdraw strategy by using normal logic like used in purse.
+ * @author Pichaaun Popukdee
+ */
+
 public class GreedyWithdraw implements WithdrawStrategy {
 
     private Comparator<Valuable> comp = new ValueComparator();
